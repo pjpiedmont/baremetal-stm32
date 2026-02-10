@@ -3,11 +3,11 @@ ENTRY(reset_handler)
 
 MEMORY
 {
-	flash(rx) : ORIGIN = 0x08000000, LENGTH = 512K
-	sram(rxw) : ORIGIN = 0x20000000, LENGTH = 128K
+	FLASH(rx) : ORIGIN = 0x08000000, LENGTH = 512K
+	SRAM(rxw) : ORIGIN = 0x20000000, LENGTH = 128K
 }
 
-_estack = ORIGIN(sram) + LENGTH(sram);
+_estack = ORIGIN(SRAM) + LENGTH(SRAM);
 
 /* Set minimum size for stack and dynamic memory. */
 /* (The linker will generate an error if there is
@@ -56,7 +56,7 @@ SECTIONS
         *(.data*)
         _edata = .;
         . = ALIGN(4);
-    } >RAM
+    } >SRAM
 
     /* The 'bss' section is similar to the 'data' section,
     * but its space is initialized to all 0s at the
@@ -71,7 +71,7 @@ SECTIONS
         *(COMMON)
         . = ALIGN(4);
         _ebss = .;
-    } >RAM
+    } >SRAM
 
     /* Space set aside for the application's heap/stack. */
     .user_heap_stack :
@@ -82,5 +82,5 @@ SECTIONS
         . = . + _Min_Stack_Size;
         . = ALIGN(4);
         _esystem_ram = .;
-    } >RAM
+    } >SRAM
 }

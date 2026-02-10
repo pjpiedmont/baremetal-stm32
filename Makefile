@@ -1,11 +1,11 @@
 TARGET = main
 
 # Define the linker script location and chip architecture.
-LD_SCRIPT = STM32F031K6T6.ld
-MCU_SPEC  = cortex-m0
+LD_SCRIPT = STM32F446RE.ld
+MCU_SPEC  = cortex-m4
 
 # Toolchain definitions (ARM bare metal defaults)
-TOOLCHAIN = /usr
+TOOLCHAIN = /opt/homebrew
 CC = $(TOOLCHAIN)/bin/arm-none-eabi-gcc
 AS = $(TOOLCHAIN)/bin/arm-none-eabi-as
 LD = $(TOOLCHAIN)/bin/arm-none-eabi-ld
