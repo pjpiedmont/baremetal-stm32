@@ -12,8 +12,8 @@ _estack = ORIGIN(sram) + LENGTH(sram);
 /* Set minimum size for stack and dynamic memory. */
 /* (The linker will generate an error if there is
  * less than this much RAM leftover.) */
-/* (1KB) */
-_Min_Leftover_RAM = 0x400;
+_Min_Heap_Size = 0x200;
+_Min_Stack_Size = 0x400;
 
 SECTIONS
 {
@@ -74,11 +74,12 @@ SECTIONS
     } >RAM
 
     /* Space set aside for the application's heap/stack. */
-    .dynamic_allocations :
+    .user_heap_stack :
     {
         . = ALIGN(4);
         _ssystem_ram = .;
-        . = . + _Min_Leftover_RAM;
+        . = . + _Min_Heap_Size;
+        . = . + _Min_Stack_Size;
         . = ALIGN(4);
         _esystem_ram = .;
     } >RAM
